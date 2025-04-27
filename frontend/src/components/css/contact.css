@@ -1,0 +1,13 @@
+.contact-section {
+  background-color: #f9f9f9;
+  border-radius: 12px;
+}
+
+.contact-section h1 span {
+  color: #007bff;
+}
+
+.contact-section .form-control:focus {
+  box-shadow: none;
+  border-color: #007bff;
+}
