@@ -24,124 +24,81 @@ const Footer = () => {
 
   return (
     <>
-      <footer
-        className="footer-wrap-layout1"
-        style={{
-          backgroundColor: "#111",
-          color: "#fff",
-          padding: "40px 0",
-          textAlign: "center",
-        }}
-      >
-        <div className="container">
-  <div className="row d-flex justify-content-center align-items-center">
-    {/* Center - Logo + Copyright */}
-    <div className="col-lg-6 text-center">
-      <div
-        className="footer-box-layout1"
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          textAlign: "center", // Ensures text is centered
-        }}
-      >
-        <div className="footer-logo" style={{ marginBottom: "15px" }}>
-          <Link to="/">
-            <img
-              src="/img/main-logo.png"
-              alt="logo"
-              style={{ width: "140px", height: "auto" }}
-            />
-          </Link>
-        </div>
-        <div
-          className="copyright"
-          style={{ fontSize: "14px", color: "#aaa" }}
-        >
-          © {new Date().getFullYear()} eduzenship. All Rights Reserved.
-        </div>
-      </div>
+       <footer
+  style={{
+    backgroundColor: "#000",
+    padding: "40px 0",
+    color: "#fff",
+    width: "100%",
+  }}
+>
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      flexWrap: "wrap",
+      maxWidth: "1200px",
+      margin: "0 auto",
+      padding: "0 20px",
+    }}
+  >
+    {/* Left: Copyright */}
+    <div style={{ flex: "1", textAlign: "left", fontSize: "14px" }}>
+      © {new Date().getFullYear()} Eduzenship. All Rights Reserved.
     </div>
 
-    {/* Social Icons and WhatsApp */}
-    <div className="col-lg-6 text-center">
-      <div className="footer-social">
-        <ul
-          className="footer-social-list"
-          style={{
-            listStyle: "none",
-            padding: 0,
-            display: "flex",
-            justifyContent: "center",
-            gap: "15px",
-            margin: "20px 0",
-          }}
-        >
-          <li>
-            <a
-              href="https://www.facebook.com/eduzenship.bd/"
-              target="_blank"
-              style={{ color: "#fff", fontSize: "18px" }}
-            >
-              <i className="fab fa-facebook-f" />
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://www.instagram.com/eduzenship.bd/"
-              target="_blank"
-              style={{ color: "#fff", fontSize: "18px" }}
-            >
-              <i className="fab fa-instagram" />
-            </a>
-          </li>
-        </ul>
+    {/* Center: Logo */}
+    <div style={{ flex: "1", textAlign: "center" }}>
+      <Link to="/">
+        <img
+          src="/img/main-logo.png"
+          alt="Eduzenship Logo"
+          style={{ height: "60px" }}
+        />
+      </Link>
+    </div>
 
-        <div style={{ color: "#fff", fontSize: "16px" }}>
-          <span style={{ display: "block" }}>
-            <a
-              href={`https://wa.me/${name.whatsApp}`}
-              target="_blank"
-              style={{ color: "#fff", textDecoration: "none" }}
-            >
-              <p className="mb-0">
-                <i className="fab fa-whatsapp-square mr-2 text-primary"></i>
-                {name.whatsApp}
-              </p>
-            </a>
-          </span>
-          <span style={{ display: "block" }}>
-            <a
-              href={`https://wa.me/${name.whatsAppTwo}`}
-              target="_blank"
-              style={{ color: "#fff", textDecoration: "none" }}
-            >
-              <p className="mb-0">
-                <i className="fab fa-whatsapp-square mr-2 text-primary"></i>
-                {name.whatsAppTwo}
-              </p>
-            </a>
-          </span>
-          <span style={{ display: "block" }}>
-            <a
-              href={`https://wa.me/${name.whatsAppThree}`}
-              target="_blank"
-              style={{ color: "#fff", textDecoration: "none" }}
-            >
-              <p className="mb-0">
-                <i className="fab fa-whatsapp-square mr-2 text-primary"></i>
-                {name.whatsAppThree}
-              </p>
-            </a>
-          </span>
-        </div>
-      </div>
+    {/* Right: Menu and Social */}
+    <div
+      style={{
+        flex: "1",
+        textAlign: "right",
+        display: "flex",
+        justifyContent: "flex-end",
+        alignItems: "center",
+        gap: "20px",
+        flexWrap: "wrap",
+      }}
+    >
+      {/* Inline Menu */}
+      <Link to="/" style={{ color: "#fff", textDecoration: "none" }}>
+        Home
+      </Link>
+      <Link to="/about" style={{ color: "#fff", textDecoration: "none" }}>
+        About
+      </Link>
+      <Link to="/courses" style={{ color: "#fff", textDecoration: "none" }}>
+        Courses
+      </Link>
+      <Link to="/blog" style={{ color: "#fff", textDecoration: "none" }}>
+        Blog
+      </Link>
+      <Link to="/contact" style={{ color: "#fff", textDecoration: "none" }}>
+        Contact
+      </Link>
+
+      {/* Social Icon */}
+      <a
+        href="#"
+        style={{ color: "#fff", fontSize: "16px", textDecoration: "none" }}
+      >
+        <i className="fab fa-facebook-f"></i>
+      </a>
     </div>
   </div>
-</div>
+</footer>
 
-      </footer>
     </>
   );
 };

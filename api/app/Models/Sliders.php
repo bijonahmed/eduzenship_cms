@@ -13,12 +13,11 @@ use DB;
 class Sliders extends Authenticatable
 {
   use HasApiTokens, HasFactory, Notifiable;
-  public $table = "sliders";
-  
+  public $table = "slider_images";
+
   protected $fillable = [
-    'images',
+    'title_name',
+    'sliderImage',
     'status',
   ];
-  
-
 }

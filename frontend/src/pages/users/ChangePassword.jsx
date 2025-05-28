@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer";
 import Header from "../../components/GuestNavbar";
 import AuthUser from "../../components/AuthUser";
-import BookingFilter from "../../components/BookingFilter";
 import Swal from "sweetalert2";
 
 const ChangePassword = () => {
@@ -125,9 +124,6 @@ const ChangePassword = () => {
               </div>
             </div>
           </div>
-
-          <BookingFilter />
-
           {/* start */}
           {/* Room Start */}
           <div className="container-xxl py-1">

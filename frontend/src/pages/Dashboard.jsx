@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
 import Footer from "../components/Footer";
 import Header from "../components/GuestNavbar";
-import BookingFilter from "../components/BookingFilter";
 import AuthUser from "../components/AuthUser";
 
 const Index = () => {
@@ -86,9 +85,6 @@ const Index = () => {
               </div>
             </div>
           </div>
-
-          <BookingFilter />
-
           {/* start */}
           {/* Room Start */}
           <div className="container-xxl py-1">

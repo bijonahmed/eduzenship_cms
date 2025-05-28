@@ -184,7 +184,7 @@ h6 {
     max-width: 1370px;
     margin: 0 auto;
     padding: 0 80px;
-    box-shadow: 0px 15px 20px 0px rgba(222, 222, 222, 0.75);
+  
   }
 }
 .full-width-container .container-fluid {
@@ -1307,7 +1307,8 @@ h6 {
 .inner-page-banner {
   display: block;
   padding: 3rem 0;
-  background-color: #e5e5e5;
+  background-color: #308fff08;
+  border-radius: 10px;
 }
 .inner-page-banner .breadcrumbs-area {
   position: relative;

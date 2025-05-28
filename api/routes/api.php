@@ -61,6 +61,7 @@ Route::group([
 Route::group([
     'prefix' => 'public'
 ], function () {
+      Route::get('/getSliders', [PublicController::class, 'getSliders']);
     Route::post('bookingRequest', [GuestBookingController::class, 'bookingRequest']);
     Route::get('/activeRooms', [PublicController::class, 'activeRooms']);
     Route::get('/getRoomDetails', [PublicController::class, 'getRoomDetails']);
@@ -71,39 +72,29 @@ Route::group([
     Route::post('/sendContact', [PublicController::class, 'sendContactForm']);
     Route::get('/getSliderData', [PublicController::class, 'getSliderData']);
     Route::get('/getPostData', [PublicController::class, 'getPostData']);
+    Route::get('/getMultipleCatData', [PublicController::class, 'getMultipleCatData']);
     Route::get('/getSlugData', [PublicController::class, 'getSlugData']);
     Route::get('/getFeaturesArticle', [PublicController::class, 'getFeaturesArticle']);
+});
 
-});
-/*
-Route::group([
-    'prefix' => 'booking'
-], function () {
-    Route::get('getUserRow', [BookingController::class, 'editUserId']);
-    Route::get('/getRoomDetails', [BookingController::class, 'getRoomDetails']);
-    Route::post('bookingRequest', [BookingController::class, 'bookingRequest']);
-    Route::get('/getBookingDetails', [BookingController::class, 'getBookingDetails']);
-    Route::get('/activeBookingRooms', [BookingController::class, 'activeBookingRooms']);
-  
-});
-*/
+
 Route::middleware(['auth:api', CheckUserStatus::class])->group(function () {
 
-    Route::group([
-        'prefix' => 'booking'
-    ], function () {
-        Route::get('getUserRow', [BookingController::class, 'editUserId']);
-        Route::get('/getRoomDetails', [BookingController::class, 'getRoomDetails']);
-        Route::post('bookingRequest', [BookingController::class, 'bookingRequest']);
-        Route::get('/getBookingDetails', [BookingController::class, 'getBookingDetails']);
-        Route::get('/activeBookingRooms', [BookingController::class, 'activeBookingRooms']);
-        Route::get('/checkroomBookingStatus', [BookingController::class, 'checkroomBookingStatus']);
-        Route::get('/getBookingEditdata', [BookingController::class, 'getBookingEditdata']);
-        Route::post('/bookingUpdate', [BookingController::class, 'bookingUpdate']);
-        Route::post('/bookingUpdateInOut', [BookingController::class, 'bookingUpdateInOut']);
-        Route::post('/adminBookingRequest', [BookingController::class, 'adminBookingRequest']);
-        Route::post('/checkStatusUpdate', [BookingController::class, 'checkStatusUpdate']);
-    });
+    // Route::group([
+    //     'prefix' => 'booking'
+    // ], function () {
+    //     Route::get('getUserRow', [BookingController::class, 'editUserId']);
+    //     Route::get('/getRoomDetails', [BookingController::class, 'getRoomDetails']);
+    //     Route::post('bookingRequest', [BookingController::class, 'bookingRequest']);
+    //     Route::get('/getBookingDetails', [BookingController::class, 'getBookingDetails']);
+    //     Route::get('/activeBookingRooms', [BookingController::class, 'activeBookingRooms']);
+    //     Route::get('/checkroomBookingStatus', [BookingController::class, 'checkroomBookingStatus']);
+    //     Route::get('/getBookingEditdata', [BookingController::class, 'getBookingEditdata']);
+    //     Route::post('/bookingUpdate', [BookingController::class, 'bookingUpdate']);
+    //     Route::post('/bookingUpdateInOut', [BookingController::class, 'bookingUpdateInOut']);
+    //     Route::post('/adminBookingRequest', [BookingController::class, 'adminBookingRequest']);
+    //     Route::post('/checkStatusUpdate', [BookingController::class, 'checkStatusUpdate']);
+    // });
 
     Route::group([
         'prefix' => 'user'
@@ -163,56 +154,56 @@ Route::middleware(['auth:api', CheckUserStatus::class])->group(function () {
     });
 
 
-    Route::group([
-        'prefix' => 'roomsetting'
-    ], function () {
-        Route::post('roomFacilitiesSave', [RoomSettingController::class, 'roomFacilitiesSave']);
-        Route::get('promocodeList', [RoomSettingController::class, 'promocodeList']);
-        Route::post('promoCodeSave', [RoomSettingController::class, 'promoCodeSave']);
-        Route::get('delteRoomImages', [RoomSettingController::class, 'delteRoomImages']);
-        Route::post('roomImagesSave', [RoomSettingController::class, 'roomImagesSave']);
-        Route::get('roomList', [RoomSettingController::class, 'roomList']);
-        Route::post('roomSave', [RoomSettingController::class, 'roomSave']);
-        Route::get('roomSizeList', [RoomSettingController::class, 'roomSizeList']);
-        Route::get('getsRoomSize', [RoomSettingController::class, 'getsRoomSize']);
-        Route::get('getsRoomTypes', [RoomSettingController::class, 'getsRoomTypes']);
-        Route::get('getsRoomImages', [RoomSettingController::class, 'getsRoomImages']);
-        Route::get('getsBetType', [RoomSettingController::class, 'getsBetType']);
-        Route::post('roomSizeSave', [RoomSettingController::class, 'roomSizeSave']);
-        Route::get('checkPromoCodeRow', [RoomSettingController::class, 'checkPromoCodeRow']);
-        Route::get('checkRoomSizeRow', [RoomSettingController::class, 'checkRoomSizeRow']);
-        Route::post('bedtypeSave', [RoomSettingController::class, 'bedtypeSave']);
-        Route::get('bedtypelist', [RoomSettingController::class, 'bedtypelist']);
-        Route::get('checkRoomRow', [RoomSettingController::class, 'checkRoomRow']);
-        Route::get('checkBedTypeRow', [RoomSettingController::class, 'checkBedTypeRow']);
-        Route::post('bookingTypeSave', [RoomSettingController::class, 'bookingTypeSave']);
-        Route::get('bookingTypeList', [RoomSettingController::class, 'bookingTypeList']);
-        Route::get('checkBookingTypeRow', [RoomSettingController::class, 'checkBookingTypeRow']);
-        Route::get('filterRoomImage', [RoomSettingController::class, 'filterRoomImage']);
-        Route::get('checkselectedfacilities', [RoomSettingController::class, 'checkselectedfacilities']);
-        Route::post('deleteSelectedFacilities', [RoomSettingController::class, 'deleteSelectedFacilities']);
-    });
+    // Route::group([
+    //     'prefix' => 'roomsetting'
+    // ], function () {
+    //     Route::post('roomFacilitiesSave', [RoomSettingController::class, 'roomFacilitiesSave']);
+    //     Route::get('promocodeList', [RoomSettingController::class, 'promocodeList']);
+    //     Route::post('promoCodeSave', [RoomSettingController::class, 'promoCodeSave']);
+    //     Route::get('delteRoomImages', [RoomSettingController::class, 'delteRoomImages']);
+    //     Route::post('roomImagesSave', [RoomSettingController::class, 'roomImagesSave']);
+    //     Route::get('roomList', [RoomSettingController::class, 'roomList']);
+    //     Route::post('roomSave', [RoomSettingController::class, 'roomSave']);
+    //     Route::get('roomSizeList', [RoomSettingController::class, 'roomSizeList']);
+    //     Route::get('getsRoomSize', [RoomSettingController::class, 'getsRoomSize']);
+    //     Route::get('getsRoomTypes', [RoomSettingController::class, 'getsRoomTypes']);
+    //     Route::get('getsRoomImages', [RoomSettingController::class, 'getsRoomImages']);
+    //     Route::get('getsBetType', [RoomSettingController::class, 'getsBetType']);
+    //     Route::post('roomSizeSave', [RoomSettingController::class, 'roomSizeSave']);
+    //     Route::get('checkPromoCodeRow', [RoomSettingController::class, 'checkPromoCodeRow']);
+    //     Route::get('checkRoomSizeRow', [RoomSettingController::class, 'checkRoomSizeRow']);
+    //     Route::post('bedtypeSave', [RoomSettingController::class, 'bedtypeSave']);
+    //     Route::get('bedtypelist', [RoomSettingController::class, 'bedtypelist']);
+    //     Route::get('checkRoomRow', [RoomSettingController::class, 'checkRoomRow']);
+    //     Route::get('checkBedTypeRow', [RoomSettingController::class, 'checkBedTypeRow']);
+    //     Route::post('bookingTypeSave', [RoomSettingController::class, 'bookingTypeSave']);
+    //     Route::get('bookingTypeList', [RoomSettingController::class, 'bookingTypeList']);
+    //     Route::get('checkBookingTypeRow', [RoomSettingController::class, 'checkBookingTypeRow']);
+    //     Route::get('filterRoomImage', [RoomSettingController::class, 'filterRoomImage']);
+    //     Route::get('checkselectedfacilities', [RoomSettingController::class, 'checkselectedfacilities']);
+    //     Route::post('deleteSelectedFacilities', [RoomSettingController::class, 'deleteSelectedFacilities']);
+    // });
 
 
-    Route::group([
-        'prefix' => 'roomfacility'
-    ], function () {
+    // Route::group([
+    //     'prefix' => 'roomfacility'
+    // ], function () {
 
-        Route::get('getsFacilityGruop', [FacilityController::class, 'getsFacilityGruop']);
-        Route::post('roomFacilitySave', [FacilityController::class, 'roomFacilitySave']);
-        Route::get('roomfacility_group_list', [FacilityController::class, 'roomfacilityGroupList']);
-        Route::get('roomfacility_list', [FacilityController::class, 'roomfacility_list']);
-        Route::post('roomFacilityGroupSave', [FacilityController::class, 'roomFacilityGroupSave']);
-        Route::get('checkRoomFacilityGroupRow', [FacilityController::class, 'checkRoomFacilityGroupRow']);
-        Route::get('checkFacilities', [FacilityController::class, 'checkFacilities']);
-        Route::get('checkRoomFacilityRow', [FacilityController::class, 'checkRoomFacilityRow']);
-    });
+    //     Route::get('getsFacilityGruop', [FacilityController::class, 'getsFacilityGruop']);
+    //     Route::post('roomFacilitySave', [FacilityController::class, 'roomFacilitySave']);
+    //     Route::get('roomfacility_group_list', [FacilityController::class, 'roomfacilityGroupList']);
+    //     Route::get('roomfacility_list', [FacilityController::class, 'roomfacility_list']);
+    //     Route::post('roomFacilityGroupSave', [FacilityController::class, 'roomFacilityGroupSave']);
+    //     Route::get('checkRoomFacilityGroupRow', [FacilityController::class, 'checkRoomFacilityGroupRow']);
+    //     Route::get('checkFacilities', [FacilityController::class, 'checkFacilities']);
+    //     Route::get('checkRoomFacilityRow', [FacilityController::class, 'checkRoomFacilityRow']);
+    // });
 
 
     Route::group([
         'prefix' => 'dashboard'
     ], function () {
-        Route::get('countData', [DashboardController::class, 'countData']);
+        Route::get('countBookingData', [DashboardController::class, 'countData']);
         Route::get('getTodayBookingList', [DashboardController::class, 'getTodayBookingList']);
     });
 
@@ -221,13 +212,14 @@ Route::middleware(['auth:api', CheckUserStatus::class])->group(function () {
         'prefix' => 'report'
     ], function () {
         Route::get('filterBybookingReport', [ReportController::class, 'filterBybookingReport']);
-       
     });
 
 
     Route::group([
         'prefix' => 'setting'
     ], function () {
+        Route::get('delteSliderImages', [SettingController::class, 'delteSliderImages']);
+        Route::post('sliderImagesSave', [SettingController::class, 'sliderSave']);
         Route::get('/dynamicLeftSidebarmenu', [LeftSideMenuController::class, 'dynamicMenuLeftSidebar']);
         Route::post('insertLanguageAdd', [SettingController::class, 'insertLanguageAdd']);
         Route::post('saveAPIKey', [SettingController::class, 'saveAPIKey']);
@@ -238,5 +230,6 @@ Route::middleware(['auth:api', CheckUserStatus::class])->group(function () {
         Route::get('getLanguageList', [SettingController::class, 'getLanguageList']);
         Route::get('getLanguageActiveList', [SettingController::class, 'getLanguageActiveList']);
         Route::get('languagerow/{id}', [SettingController::class, 'chkLanguagerow']);
+        Route::get('getsSliderImages', [SettingController::class, 'getsSliderImages']);
     });
 });

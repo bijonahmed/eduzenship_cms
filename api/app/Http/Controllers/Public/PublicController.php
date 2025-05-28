@@ -24,6 +24,26 @@ class PublicController extends Controller
 {
 
 
+    public function getSliders(Request $request)
+    {
+        try {
+            $sliderImg = Sliders::where('status', 1)
+                ->get()
+                ->map(function ($slider) {
+                    return [
+                        'id'              => $slider->id,
+                        'title_name'      => $slider->title_name,
+                        'sliderImage'     => !empty($slider->sliderImage) ? url($slider->sliderImage) : ""
+                    ];
+                });
+
+            return response()->json(['data' => $sliderImg], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+
     public function getSliderData(Request $request)
     {
         //dd($request->all());
@@ -58,6 +78,27 @@ class PublicController extends Controller
             'data' => $postData
         ], 200);
     }
+
+
+    public function getMultipleCatData(Request $request)
+    {
+        //dd($request->all());
+        $post_category_id = !empty($request->post_category_id) ? $request->post_category_id : "";
+        $postData  = Post::whereIn('post_category_id', [2,3,4,6,8,14])->where('status', 1)->get()->map(function ($data) {
+            return [
+                'id'           => $data->id,
+                'title'        => $data->name,
+                'slug'         => $data->slug,
+                'image'        => !empty($data->thumnail_img) ? url($data->thumnail_img) : "",
+                'description'  => !empty($data->description) ? $data->description : ""
+            ];
+        });;
+        return response()->json([
+            'data' => $postData
+        ], 200);
+    }
+
+
 
     public function getFeaturesArticle(Request $request)
     {

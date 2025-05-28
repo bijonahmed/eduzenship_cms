@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import axios from "/config/axiosConfig";
 import Footer from "../components/Footer";
 import Header from "../components/GuestNavbar";
-import BookingFilter from "../components/BookingFilter";
+
 import { Helmet } from "react-helmet";
-import FeaturesPost from "../components/FeaturesPost";
+// import FeaturesPost from "../components/FeaturesPost";
 import Loader from "../components/Loader";
 import { useParams } from 'react-router-dom';
 
@@ -116,7 +116,7 @@ const BlogDetails = () => {
                     ))
                   )}
                 </div>
-                <FeaturesPost />
+                {/* <FeaturesPost /> */}
               </div>
             </div>
           </section>

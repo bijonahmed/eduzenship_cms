@@ -12,15 +12,13 @@ class LeftSideMenuController extends Controller
 {
 
     protected $userid;
-    public function __construct()
+
+     public function __construct()
     {
-        $this->middleware('auth:api');
-        $id = auth('api')->user();
-        if (!empty($id)) {
-            $user = User::find($id->id);
-            $this->userid = $user->id;
-        }
+        $this->middleware('auth:api', ['except' => ['dynamicMenuLeftSidebar']]);
     }
+
+    
 
     public function dynamicMenuLeftSidebar()
     {
@@ -103,6 +101,7 @@ class LeftSideMenuController extends Controller
                 'submenu' => [
                     ['label' => 'Global Category', 'path' => '/category/global-category-list', 'icon' => 'bx bx-radio-circle'],
                     ['label' => 'Frontend Setting', 'path' => '/setting/global-setting', 'icon' => 'bx bx-radio-circle'],
+                    ['label' => 'Slider', 'path' => '/setting/slider-list', 'icon' => 'bx bx-radio-circle'],
                     //['label' => 'Global Wallet Address', 'path' => '/wallet/global-wallet-address-list', 'icon' => 'bx bx-radio-circle'],
                     // ['label' => 'Confirgration API Key', 'path' => '/configration/config-api-key-list', 'icon' => 'bx bx-radio-circle'],
                     // ['label' => 'Merchant Request', 'path' => '/configration/config-api-key-list', 'icon' => 'bx bx-radio-circle']

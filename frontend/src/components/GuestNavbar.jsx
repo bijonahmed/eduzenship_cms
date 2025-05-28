@@ -12,7 +12,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const { getToken, token, logout } = AuthUser();
-
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
   const fetechGlobalData = async () => {
     try {
       const response = await axios.get(`/public/getGlobalData`);
@@ -54,7 +54,7 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Toggle function to control the collapse
   const toggleCollapse = () => {
@@ -64,62 +64,79 @@ const Navbar = () => {
   return (
     <>
       {/* header  */}
-      {/* Mobile Navbar: Visible only on screens < 992px */}
-      <nav className="navbar navbar-light bg-light d-block d-lg-none">
-        <div className="container d-flex justify-content-between align-items-center">
-          {/* Logo (Left) */}
-          <Link className="navbar-brand" to="/">
-            <img
-              src="/img/main-logo.png"
-              width={120}
-              alt="Logo"
-            />
-          </Link>
-          {/* Toggler (Right) */}
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#mobileNavbar"
-            aria-controls="mobileNavbar"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon" />
-          </button>
-        </div>
-        {/* Collapsible Menu */}
-        <div className="collapse navbar-collapse" id="mobileNavbar">
-          <ul className="navbar-nav px-3">
-            <li className="nav-item">
-              <Link className="nav-link" to="/">
-                Home
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/about">
-                About
-              </Link>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                Blog
-              </a>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/contact">
-                Contact
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
       <header className="has-mobile-menu">
         <div
+          id="header-topbar"
+          className="pt--14 pb--14 bg--light border-bootom border-color-accent1"
+        >
+          <div className="container">
+            <div className="row d-flex align-items-center">
+              <div className="col-lg-3 d-flex justify-content-start">
+                <div className="header-action-items">
+                  <ul>
+                    <li className="item-subscribe">
+                      <i className="flaticon-envelope" />
+                      SUBSCRIBE!
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div className="col-lg-9 d-flex justify-content-end">
+                <div className="header-action-items">
+                  <ul>
+                    <li className="item-social-layout1">
+                      <i className="fab fa-facebook-f" />
+                      10K <span>LIKES</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
           id="header-middlebar"
-          className="box-layout-child bg--light border-bootom border-color-accent2"
-        ></div>
+          className="sticky-top box-layout-child bg--light border-bootom border-color-accent2"
+        >
+          <div className="pt--25 pb--25">
+            <div className="container">
+              <div className="row d-flex align-items-center">
+                <div className="col-lg-4">
+                  <div className="header-action-items">
+                    <ul>
+                      <li className="offcanvas-menu-trigger-wrap">
+                        <button
+                          type="button"
+                          onClick={() => setIsMenuOpen((prev) => !prev)}
+                          className="offcanvas-menu-btn menu-status-open"
+                        >
+                          <span className="btn-icon-wrap">
+                            <span />
+                            <span />
+                            <span />
+                          </span>
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="col-lg-4 d-flex justify-content-center">
+                  <div className="logo-area">
+                    <Link to="/" className="temp-logo" id="temp-logo">
+                      <img
+                        src="/img/main-logo.png"
+                        alt="logo"
+                        className="img-fluid"
+                        style={{ height: "60px" }}
+                      />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div id="rt-sticky-placeholder" />
         <div
           id="header-menu"
@@ -130,56 +147,34 @@ const Navbar = () => {
               <div className="col-lg-12">
                 <nav id="dropdown" className="template-main-menu">
                   <ul>
-                    <div className="logo-area">
-                      <Link to="/" className="temp-logo" id="temp-logo">
-                        <img
-                          src="/img/main-logo.png"
-                          alt="logo"
-                          className="img-fluid"
-                          style={{
-                            width: "150px",
-                            height: "auto",
-                            marginTop: "20px",
-                          }} // Set width and height
-                        />
-                      </Link>
-                    </div>
                     <li className="hide-on-mobile-menu">
-                      <Link to="/">HOME</Link>
+                      <a href="/">HOME</a>
                     </li>
-
-                    <li>
-                      <Link to="/about">
-                        ABOUT
-                        <i className="fas fa-chevron-down" style={{ marginLeft: "8px" }}/>
-                      </Link>
-                      <ul className="dropdown-menu-col-1">
-                        <li><Link to="/about">About US</Link></li>
-                        <li><Link to="/mission-vision">Mission & Vision</Link></li>
-                        <li><Link to="/goals">Goals</Link></li>
-                      </ul>
+                    <li className="hide-on-desktop-menu">
+                      <a href="/">HOME</a>
                     </li>
-
                     <li>
-                      <a href="#"> Service <i className="fas fa-chevron-down" style={{ marginLeft: "8px" }}/>
-                      </a>
+                      <Link to="/about">ABOUT</Link>
+                    </li>
+                    <li>
+                      <a href="#">CATEGORIES</a>
                       <ul className="dropdown-menu-col-1">
                         <li>
-                          <Link to="/countries">Countries</Link>
+                          <a href="#">Blog Category 1</a>
                         </li>
                         <li>
-                          <Link to="/courses">Course</Link>
+                          <a href="#">Blog Category 2</a>
                         </li>
                         <li>
-                          <Link to="/our-services">Our Services</Link>
+                          <a href="#">Blog Category 3</a>
                         </li>
                         <li>
-                          <Link to="/our-offerings">Our Offerings</Link>
+                          <a href="#">Blog Category 4</a>
                         </li>
                       </ul>
                     </li>
                     <li>
-                      <Link to="/blog">BLOG</Link>
+                      <a href="#">BLOG</a>
                     </li>
                     <li>
                       <Link to="/contact">CONTACT</Link>
@@ -192,7 +187,104 @@ const Navbar = () => {
         </div>
       </header>
 
-      {/* ------------- Header end ----------------  */}
+      {/* Show Only MObile View */}
+      {/* Mobile-only navbar */}
+      <nav className="navbar navbar-expand-lg navbar-light bg-light d-block d-lg-none">
+        <div className="container-fluid">
+          <a className="navbar-brand" href="/">
+          <img
+                        src="/img/main-logo.png"
+                        alt="logo"
+                        className="img-fluid"
+                        style={{ height: "40px" }}
+                      />
+          </a>
+          <button
+            className="navbar-toggler"
+            type="button"
+            onClick={() => setIsMenuOpen((prev) => !prev)}
+            aria-controls="mobileNavbar"
+            aria-expanded={isMenuOpen}
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div
+            className={`collapse navbar-collapse ${isMenuOpen ? "show" : ""}`}
+            id="mobileNavbar"
+          >
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                <a className="nav-link" href="/">
+                  Home
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/about">
+                  About
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/blog">
+                  Blog
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/contact">
+                  Contact
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      {/* END */}
+
+      <div
+        className={`offcanvas-menu-wrap ${isMenuOpen ? "active" : ""}`}
+        id="offcanvas-wrap"
+        data-position="left"
+      >
+        <div className="offcanvas-content">
+          <div className="offcanvas-logo">
+            <a href="/">
+              <img
+                src="/img/main-logo.png"
+                style={{ height: "50px", width: "100%" }}
+                alt="logo"
+              />
+            </a>
+          </div>
+          <ul className="offcanvas-menu">
+            <li className="nav-item">
+              <a href="/">HOME</a>
+            </li>
+            <li className="nav-item">
+              <Link href="/about">ABOUT</Link>
+            </li>
+            <li className="nav-item">
+              <a href="#">CATEGORIES</a>
+            </li>
+            <li className="nav-item">
+              <a href="#">Blog</a>
+            </li>
+            <li className="nav-item">
+              <Link href="/contact">Contact</Link>
+            </li>
+          </ul>
+          <div className="offcanvas-footer">
+            <div className="item-title">Follow Me</div>
+            <ul className="offcanvas-social">
+              <li>
+                <a href="#">
+                  <i className="fab fa-facebook-f" />
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

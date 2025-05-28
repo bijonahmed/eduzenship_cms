@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use App\Rules\MatchOldPassword;
 use App\Http\Controllers\Controller;
 use App\Models\BulkAddress;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
@@ -219,9 +220,110 @@ class SettingController extends Controller
     }
 
 
- 
+     public function sliderSave(Request $request)
+    {
+        // dd($request->all());
+        $validator = Validator::make($request->all(), [
+            'title_name'      => 'required',
+            'sliderImage'    => 'required|file|mimes:jpg,jpeg,png|max:2048',
+            'status'       => 'required',
+        ], [
+            'title_name.required'   => 'Title name is requried.',
+            'sliderImage.required'    => 'Please upload a slider image.',
+            'sliderImage.file'        => 'The uploaded file must be an image.',
+            'sliderImage.mimes'       => 'Only JPG, JPEG, and PNG images are allowed.',
+            'sliderImage.max'         => 'The image size must be less than 2MB.',
+            'status.required'       => 'Please select the room status.',
+        ]);
 
-    public function saveSetting(Request $request){
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $data = array(
+            'title_name'                => $request->title_name,
+            'status'                 => $request->status,
+        );
+
+        if (!empty($request->file('sliderImage'))) {
+            $files = $request->file('sliderImage');
+            $fileName = Str::random(20);
+            $ext = strtolower($files->getClientOriginalExtension());
+            $path = $fileName . '.' . $ext;
+            $uploadPath = '/backend/files/';
+            $upload_url = $uploadPath . $path;
+            $files->move(public_path('/backend/files/'), $upload_url);
+            $file_url = $uploadPath . $path;
+            $data['sliderImage'] = $file_url;
+        }
+
+
+        if (empty($request->id)) {
+            Sliders::create($data);
+        } else {
+            Sliders::where('id', $request->id)->update($data);
+        }
+
+        $response = [
+            'message' => 'Successfull insert',
+        ];
+        return response()->json($response);
+    }
+
+    public function delteSliderImages(Request $request)
+    {
+        // dd($request->all());
+        try {
+            $row = Sliders::where('id', $request->id)->first();
+            if ($row) {
+
+                $imagePath = public_path($row->sliderImage);
+
+                if (File::exists($imagePath)) {
+                    File::delete($imagePath);
+                }
+                $row->delete();
+
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Image deleted successfully.',
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Image not found.',
+                ]);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'An error occurred while deleting the image.',
+                'error' => $e->getMessage(),
+            ]);
+        }
+    }
+    public function getsSliderImages()
+    {
+        try {
+            $allImages = Sliders::where('status', 1)->get();
+            $data = [];
+            foreach ($allImages as $key => $v) {
+
+                $data[] = [
+                    'id'        => $v->id,
+                    'title_name'  => !empty($v->title_name) ? $v->title_name : "",
+                    'sliderImage' => !empty($v->sliderImage) ? url($v->sliderImage) : ""
+                ];
+            }
+
+            return response()->json($data);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function saveSetting(Request $request)
+    {
 
         //dd($request->all());
         $validator = Validator::make($request->all(), [
@@ -232,7 +334,7 @@ class SettingController extends Controller
             'about_us'      => 'required',
         ]);
 
-        
+
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
@@ -249,8 +351,7 @@ class SettingController extends Controller
         );
         Setting::where('id', 1)->update($data);
 
-        return response()->json("Successfull update",200);
-
+        return response()->json("Successfull update", 200);
     }
 
 

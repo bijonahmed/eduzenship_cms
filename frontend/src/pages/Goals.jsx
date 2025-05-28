@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import axios from "/config/axiosConfig";
 import Footer from "../components/Footer";
 import Header from "../components/GuestNavbar";
-import BookingFilter from "../components/BookingFilter";
 import { Helmet } from "react-helmet";
 import Loader from "../components/Loader";
 const Goals = () => {

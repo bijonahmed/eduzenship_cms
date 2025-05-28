@@ -4,7 +4,6 @@ import axios from "/config/axiosConfig";
 import Footer from "../components/Footer";
 import Header from "../components/GuestNavbar";
 import Loader from "../components/Loader";
-import BookingFilter from "../components/BookingFilter";
 import { Helmet } from "react-helmet";
 
 const About = () => {
@@ -36,7 +35,7 @@ const About = () => {
         <i className="fas fa-angle-double-up" />
       </a>
 
-      <div id="wrapper" className="wrapper">
+      <div id="wrapper" className="box-layout-child bg--light wrapper">
         <Header />
 
         <Helmet>
@@ -84,13 +83,14 @@ const About = () => {
                           className="img-fluid rounded w-100"
                           style={{
                             height: "auto",
-                            maxHeight: "600px",
+                            maxHeight: "700px",
                             border: "4px solid #ccc", // light gray border
                             borderRadius: "8px", // slightly rounded corners
                             boxShadow: "0 4px 12px rgba(0,0,0,0.1)", // subtle shadow for depth
                           }}
                         />
                       </div>
+                      <br/>
                       <div
                         className="item-content"
                         style={{ maxWidth: "100%", color: "black" }}
@@ -121,8 +121,10 @@ const About = () => {
           </div>
         </section>
 
-        <Footer />
+        
       </div>
+      <br/>
+      <Footer />
     </div>
   );
 };

@@ -8,8 +8,6 @@ import Forgetpassword from "../pages/Forgetpassword.jsx";
 import Register from "../pages/Register";
 import Login from "../pages/Login";
 import UserLogin from "../pages/UserLogin.jsx";
-import Booking from "../pages/booking/Booking.jsx";
-import BookingSuccess from "../pages/booking/BookingSuccess.jsx";
 import Contact from "../pages/Contact.jsx";
 import Service from "../pages/Service.jsx";
 import About from "../pages/About.jsx";
@@ -25,7 +23,7 @@ import MissionVission from "../pages/MissionVission.jsx";
 import ChangePassword from "../pages/users/ChangePassword.jsx";
 //For Admin Panel
 import Dashboard from "../pages/Dashboard";
-import BookingHistory from "../pages/booking/BookingHistory.jsx";
+
 import MyProfile from "../pages/users/MyProfile.jsx";
 
 // import MerchantList from "../pages/users/MerchantList.jsx";
@@ -49,8 +47,6 @@ const AppRouter = () => {
       <Route path="/user-login" element={<UserLogin />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/forget-password" element={<Forgetpassword />} />
-      <Route path="/booking-details/:slug" element={<Booking />} />
-      <Route path="/booking-history-details/:id" element={<BookingHistory />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/service" element={<Service />} />
       <Route path="/about" element={<About />} />
@@ -64,9 +60,9 @@ const AppRouter = () => {
       <Route path="/blog-details" element={<BlogDetails />} />
       <Route path="/user/change-password" element={<ChangePassword />} />
       <Route path="/user/profile" element={<MyProfile />} />
-      <Route path="/booking-success" element={<BookingSuccess />} />
       <Route path="/details/:slug" element={<Details />} />
       <Route path="/reading-blog/:slug" element={<BlogDetails />} />
+      
       {/* 
       <Route path="/user/role-list" element={<RoleList />} />
       <Route path="/user/role-add" element={<RoleAdd />} />

@@ -19,7 +19,7 @@ import RoleAdd from "../pages/users/Addrole.jsx";
 import BulkAddress from "../pages/configration/address/BulkAddress.jsx";
 import TransactionReport from "../pages/report/TransactionReport.jsx";
 import CheckLogAPI from "../pages/report/CheckLogAPI.jsx";
-
+import Slider from "../pages/setting/Slider.jsx";
 
 import RoleEdit from "../pages/users/EditRole.jsx";
 import UserEdit from "../pages/users/EditUser.jsx";
@@ -157,6 +157,7 @@ const AppRouter = () => {
       <Route path="/facilites/facilites-add" element={<FacilitesAdd />} />
       <Route path="/roomsetting/facilites-edit/:id" element={<FacilitesEdit />} />
       <Route path="/setting/global-setting" element={<GlobalSetting />} />
+	   <Route path="/setting/slider-list" element={<Slider />} />
 
 
       <Route path="/dashboard" element={<Dashboard />} />

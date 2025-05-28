@@ -37,14 +37,8 @@ class DashboardController extends Controller
     protected $userid;
     public function __construct()
     {
-        $this->middleware('auth:api');
-        $user = auth('api')->user();
-        if (!$user) {
-            return response()->json(['message' => 'Unauthenticated'], 401);
-        }
-        $this->userid = $user->id;
+        $this->middleware('auth:api', ['except' => ['countBookingData', 'getTodayBookingList']]);
     }
-
 
 
     public function countData(Request $request)
@@ -86,7 +80,7 @@ class DashboardController extends Controller
             ->leftJoin('room', 'booking.room_id', '=', 'room.id') // Fixing bed_type join
             ->leftJoin('bed_type', 'room.bed_type_id', '=', 'bed_type.id') // Fixing bed_type join
             ->get();
-       
+
         return response()->json($bookingData, 200);
     }
 }

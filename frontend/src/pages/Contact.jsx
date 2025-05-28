@@ -56,139 +56,129 @@ const Contact = () => {
 
   return (
     <div>
-     
       <Header />
       <Helmet>
         <title>Contact</title>
       </Helmet>
-      <div className="container py-5 contact-section">
-  <div className="text-center mb-5">
-    <h6 className="text-primary text-uppercase font-weight-bold">Contact Us</h6>
-    <h1 className="display-4">
-      <span className="text-primary">Contact</span> For Any Query
-    </h1>
-  </div>
 
-  <div className="row text-center mb-5">
-    <div className="col-md-4 mb-4">
-      <div className="p-4 border rounded shadow-sm h-100">
-        <h6 className="text-primary font-weight-bold">Email</h6>
-        <p className="mb-0"><i className="fa fa-envelope-open mr-2 text-primary"></i>{name.email}</p>
-      </div>
-    </div>
-    <div className="col-md-4 mb-4">
-      <div className="p-4 border rounded shadow-sm h-100">
-        <h6 className="text-primary font-weight-bold">WhatsApp</h6>
-        <p className="mb-0"><i className="fab fa-whatsapp-square mr-2 text-primary"></i>{name.whatsApp}</p>
-        <p className="mb-0"><i className="fab fa-whatsapp-square mr-2 text-primary"></i>{name.whatsAppTwo}</p>
-        <p className="mb-0"><i className="fab fa-whatsapp-square mr-2 text-primary"></i>{name.whatsAppThree}</p>
-      </div>
-    </div>
-    <div className="col-md-4 mb-4">
-      <div className="p-4 border rounded shadow-sm h-100">
-        <h6 className="text-primary font-weight-bold">Address</h6>
-        <p className="mb-0"><i className="fa fa-map-marker mr-2 text-primary"></i>{name.address}</p>
-      </div>
-    </div>
-  </div>
-
-  <div className="row">
-    <div className="col-md-6 mb-4">
-      <div className="embed-responsive embed-responsive-4by3 rounded shadow-sm">
-        <iframe
-          className="embed-responsive-item"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.7796875835056!2d90.40096871534068!3d23.790858393145534!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c752e948bbef%3A0x163c6b95603ef31c!2sEduzenship!5e0!3m2!1sen!2sbd!4v1644123285284!5m2!1sen!2sbd"
-          allowFullScreen
-          title="map"
-        ></iframe>
-      </div>
-    </div>
-    <div className="col-md-6">
-  <form onSubmit={handleSubmit} className="p-4 border rounded shadow-sm bg-white">
-    <div className="form-group">
-      <label htmlFor="name" className="h5">Your Name</label>
-      <input
-        type="text"
-        className="form-control form-control-lg"
-        id="name"
-        value={formData.name}
-        onChange={handleChange}
-        required
-      />
-    </div>
-    <div className="form-group">
-      <label htmlFor="email" className="h5">Your Email</label>
-      <input
-        type="email"
-        className="form-control form-control-lg"
-        id="email"
-        value={formData.email}
-        onChange={handleChange}
-        required
-      />
-    </div>
-    <div className="form-group">
-      <label htmlFor="subject" className="h5">Subject</label>
-      <input
-        type="text"
-        className="form-control form-control-lg"
-        id="subject"
-        value={formData.subject}
-        onChange={handleChange}
-      />
-    </div>
-    <div className="form-group">
-      <label htmlFor="message" className="h5">Message</label>
-      <textarea
-        className="form-control form-control-lg"
-        id="message"
-        rows="5"
-        value={formData.message}
-        onChange={handleChange}
-      ></textarea>
-    </div>
-    <button type="submit" className="btn btn-primary btn-lg btn-block font-weight-bold">
-      Send Message
-    </button>
-  </form>
-</div>
-
-  </div>
-
-  {showModal && (
-    <div
-      className="modal show fade d-block"
-      tabIndex="-1"
-      role="dialog"
-      style={{ background: 'rgba(0, 0, 0, 0.5)' }}
-    >
-      <div className="modal-dialog" role="document">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title">Thank You!</h5>
-            <button type="button" className="close" onClick={closeModal}>
-              <span>&times;</span>
-            </button>
+      <div className="box-layout-child bg--light">
+        <section className="inner-page-banner bg-common">
+          <div className="container">
+            <div className="row">
+              <div className="col-12">
+                <div className="breadcrumbs-area">
+                  <h1>Contact Us</h1>
+                  <ul>
+                    <li>
+                      <a href="/">Home</a>
+                    </li>
+                    <li>Contact</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="modal-body">
-            <p>Thanks for contacting us. We’ll get back to you soon.</p>
+        </section>
+        {/* Inne Page Banner Area End Here  header-menu menu-layout1 box-layout-child bg--light*/}
+        {/* Contact Area Start Here */}
+        <section className="contact-wrap-layout1">
+          <div className="container">
+            <div className="row gutters-50">
+              <div className="col-lg-8">
+                <div className="contact-box-layout1">
+                  <div className="google-map-area">
+                    <iframe
+                      className="embed-responsive-item"
+                      style={{ width: "100%", height: 450, borderRadius: 4 }}
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.7796875835056!2d90.40096871534068!3d23.790858393145534!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c752e948bbef%3A0x163c6b95603ef31c!2sEduzenship!5e0!3m2!1sen!2sbd!4v1644123285284!5m2!1sen!2sbd"
+                      allowFullScreen
+                      title="map"
+                    ></iframe>
+                  </div>
+                  <div className="contact-way">
+                    <div className="contact-list">
+                      <h3 className="item-title">Office Address</h3>
+                      <p>{name.address}</p>
+                    </div>
+                    <div className="contact-list">
+                      <h3 className="item-title">Phone</h3>
+                      <p>
+                        {name.whatsApp ? (
+                          <>
+                            <a
+                              href={`https://wa.me/${name.whatsApp}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {name.whatsApp}
+                            </a>
+                            ,{" "}
+                            <a
+                              href={`https://wa.me/${name.whatsApp}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {name.whatsApp}
+                            </a>
+                            ,{" "}
+                            <a
+                              href={`https://wa.me/${name.whatsApp}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {name.whatsApp}
+                            </a>
+                          </>
+                        ) : (
+                          ""
+                        )}
+                      </p>
+                    </div>
+                    <div className="contact-list">
+                      <h3 className="item-title">Mail Us</h3>
+                      <p>
+                        <a href={`mailto:${name.email}`}>{name.email}</a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-4 sidebar-widget-area sidebar-break-md">
+                <div className="widget">
+                  <div className="section-heading heading-dark">
+                    <h3 className="item-heading">FOLLOW ME ON</h3>
+                  </div>
+                  <div className="widget-follow-us-2">
+                    <ul> 
+                      <li className="single-item">
+                        <a href={`${name.fblink}`} target="_blank">
+                          <i className="fab fa-facebook-f" />
+                          Visit Pages
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="widget">
+                  <div className="widget-ad">
+                    <a href="#">
+                      <img
+                        src="img/carousel-2.jpg"
+                        alt="Ad"
+                        className="img-fluid"
+                      />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="modal-footer">
-            <button className="btn btn-secondary" onClick={closeModal}>
-              Close
-            </button>
-          </div>
-        </div>
+        </section>
+        {/* Contact Area End Here */}
       </div>
-    </div>
-  )}
-</div>
-
-
+      <br/>
 
       <Footer />
-
-     
     </div>
   );
 };
