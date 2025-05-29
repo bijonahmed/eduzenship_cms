@@ -19,6 +19,8 @@ use Validator;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 use App\Mail\ContactFormMail;
+use App\Models\Categorys;
+use App\Models\PostCategory;
 
 class PublicController extends Controller
 {
@@ -84,7 +86,7 @@ class PublicController extends Controller
     {
         //dd($request->all());
         $post_category_id = !empty($request->post_category_id) ? $request->post_category_id : "";
-        $postData  = Post::whereIn('post_category_id', [2,3,4,6,8,14])->where('status', 1)->get()->map(function ($data) {
+        $postData  = Post::whereIn('post_category_id', [2,3,4,6,8,14])->where('status', 1)->orderBy('id', 'desc')->get()->map(function ($data) {
             return [
                 'id'           => $data->id,
                 'title'        => $data->name,
@@ -92,7 +94,7 @@ class PublicController extends Controller
                 'image'        => !empty($data->thumnail_img) ? url($data->thumnail_img) : "",
                 'description'  => !empty($data->description) ? $data->description : ""
             ];
-        });;
+        });
         return response()->json([
             'data' => $postData
         ], 200);
@@ -140,14 +142,6 @@ class PublicController extends Controller
             'data' => $postData
         ], 200);
     }
-
-
-
-
-
-
-
-
 
     public function activeRooms(Request $request)
     {
@@ -241,6 +235,17 @@ class PublicController extends Controller
 
         try {
             $data = Setting::where('id', 1)->first();
+            return response()->json($data);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+
+      public function getCategoryList()
+    {
+        try {
+            $data = PostCategory::whereIn('id', [2,3,4,6,14])->get();
             return response()->json($data);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);

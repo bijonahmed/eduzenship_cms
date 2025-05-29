@@ -5,8 +5,9 @@ import Footer from "../components/Footer";
 import Header from "../components/GuestNavbar";
 import { Helmet } from "react-helmet";
 import Loader from "../components/Loader";
+import CategorySlug from "../components/CategorySlug";
 
-const Blog = () => {
+const CourseCategory = () => {
   const [feaArticle, setFearticle] = useState([]);
   const [loading, setLoading] = useState(false);
   const [multipleCatData, setMultipleCatData] = useState([]);
@@ -29,9 +30,9 @@ const Blog = () => {
 
   const multipleCategoryData = async () => {
     setLoading(true);
-    const post_category_id = 6;
+    const post_category_id = 3;
     try {
-      const response = await axios.get(`/public/getMultipleCatData`, {
+      const response = await axios.get(`/public/getPostData`, {
         params: { post_category_id }, // Passing the parameter as a query string
       });
       //console.log("API Response:", response.data); // Log the response
@@ -83,7 +84,7 @@ const Blog = () => {
         <Header />
 
         <Helmet>
-          <title>Blog</title>
+          <title>Course</title>
         </Helmet>
 
         <div>
@@ -92,12 +93,12 @@ const Blog = () => {
               <div className="row">
                 <div className="col-12">
                   <div className="breadcrumbs-area">
-                    <h1>Blog</h1>
+                    <h1>Course</h1>
                     <ul>
                       <li>
                         <a href="/">Home</a>
                       </li>
-                      <li>Blog</li>
+                      <li>Course</li>
                     </ul>
                   </div>
                 </div>
@@ -112,39 +113,6 @@ const Blog = () => {
             <div className="row gutters-50">
               <div className="col-lg-8">
                 {/* Start Features Post */}
-                {feaArticle.slice(-1).map((article, index) => (
-                  <div className="blog-box-layout3" key={index}>
-                    <div className="item-img">
-                      <img
-                        src={article.image}
-                        alt="blog"
-                        style={{ height: "500px", width: "100%" }}
-                      />
-                    </div>
-                    <div className="item-content">
-                      <h2 className="item-title">
-                        <a href="#">{limitCharacters(article.title, 50)}</a>
-                      </h2>
-                      <p
-                        style={{ textAlign: "justify" }}
-                        dangerouslySetInnerHTML={{
-                          __html: limitCharacters(article.description, 400),
-                        }}
-                      ></p>
-                      <div className="action-area">
-                        <Link
-                          to={`/reading-blog/${article.slug}`}
-                          className="item-btn"
-                        >
-                          READ MORE
-                          <i className="fas fa-arrow-right" />
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-                {/* END Features Post */}
-
                 <>
                   {loading ? (
                     <div className="text-center py-5">
@@ -243,58 +211,7 @@ const Blog = () => {
                     ))}
                   </div>
                 </div>
-
-                <div className="widget">
-                  <div className="section-heading heading-dark">
-                    <h3 className="item-heading">CATEGORIES</h3>
-                  </div>
-                  <div className="widget-categories">
-                    <ul>
-                      <li>
-                        <a href="#">
-                          Beauty
-                          <span>(35)</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          Fashion
-                          <span>(10)</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          Food
-                          <span>(25)</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          Life Style
-                          <span>(15)</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          Travel
-                          <span>(22)</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          Video
-                          <span>(18)</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          Technology
-                          <span>(22)</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
+                <CategorySlug />
               </div>
             </div>
           </section>
@@ -308,4 +225,4 @@ const Blog = () => {
   );
 };
 
-export default Blog;
+export default CourseCategory;

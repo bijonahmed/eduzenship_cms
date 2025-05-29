@@ -72,6 +72,7 @@ Route::group([
     Route::post('/sendContact', [PublicController::class, 'sendContactForm']);
     Route::get('/getSliderData', [PublicController::class, 'getSliderData']);
     Route::get('/getPostData', [PublicController::class, 'getPostData']);
+     Route::get('/getCategoryList', [PublicController::class, 'getCategoryList']);
     Route::get('/getMultipleCatData', [PublicController::class, 'getMultipleCatData']);
     Route::get('/getSlugData', [PublicController::class, 'getSlugData']);
     Route::get('/getFeaturesArticle', [PublicController::class, 'getFeaturesArticle']);

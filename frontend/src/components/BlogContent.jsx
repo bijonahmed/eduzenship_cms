@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "/config/axiosConfig";
-import Footer from "./Footer";
-import Header from "./GuestNavbar";
+import CategorySlug from "../components/CategorySlug";
 import { Helmet } from "react-helmet";
 import Loader from "./Loader";
 
@@ -10,8 +9,10 @@ const BlogContent = ({}) => {
   const [blogContent, setBlogData] = useState([]);
   const [feaArticle, setFearticle] = useState([]);
   const [multipleCatData, setMultipleCatData] = useState([]);
+  const [postCategory, setPostCaegory] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  
   const getBlogs = async () => {
     setLoading(true);
     const post_category_id = 14;
@@ -44,6 +45,22 @@ const BlogContent = ({}) => {
     }
   };
 
+  const categoryList = async () => {
+    setLoading(true);
+    const post_category_id = 8;
+    try {
+      const response = await axios.get(`/public/getCategoryList`, {
+        params: { post_category_id }, // Passing the parameter as a query string
+      });
+      //console.log("API Response:", response.data); // Log the response
+      setPostCaegory(response.data);
+    } catch (error) {
+      console.error("Error fetching data", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const multipleCategoryData = async () => {
     setLoading(true);
     const post_category_id = 6;
@@ -66,10 +83,18 @@ const BlogContent = ({}) => {
     return text.substring(0, charLimit) + "...";
   };
 
+  const getRoute = (slug) => {
+    if (slug === "countries") return `/country-blog`;
+    if (slug === "courses") return `/course-blog`;
+    if (slug === "blog") return `/blog`;
+    return `/default/${slug}`;
+  };
+
   useEffect(() => {
     getBlogs();
     FeaturesArticle();
     multipleCategoryData();
+    categoryList();
   }, []);
 
   return (
@@ -92,7 +117,7 @@ const BlogContent = ({}) => {
                   </div>
                   <div className="item-content">
                     <h3 className="item-title">
-                      <Link to={`blog-details/${blog.slug}`}>
+                      <Link to={`/reading-blog/${blog.slug}`}>
                         {" "}
                         {limitCharacters(blog.title, 50)}
                       </Link>
@@ -113,48 +138,55 @@ const BlogContent = ({}) => {
               {feaArticle.slice(-1).map((article, index) => (
                 <div className="blog-box-layout1" key={index}>
                   <div className="item-img">
-                    <a href="#">
+                    <Link to={`/reading-blog/${article.slug}`}>
                       <img
                         src={article.image}
                         alt="blog"
                         style={{ height: "500px", width: "100%" }}
                       />
-                    </a>
+                    </Link>
                   </div>
                   <div className="item-content">
                     <h2 className="item-title">
-                      <a href="#">{limitCharacters(article.title, 50)}</a>
+                      <Link to={`/reading-blog/${article.slug}`}>
+                        {limitCharacters(article.title, 50)}
+                      </Link>
                     </h2>
                     <p
                       dangerouslySetInnerHTML={{
                         __html: limitCharacters(article.description, 400),
                       }}
                     ></p>
-                    <a href="#" className="item-btn">
+                    <Link
+                      to={`/reading-blog/${article.slug}`}
+                      className="item-btn"
+                    >
                       READ MORE
                       <i className="fas fa-arrow-right" />
-                    </a>
+                    </Link>
                   </div>
                 </div>
               ))}
 
               <div className="row gutters-40">
-                {multipleCatData.slice(-6).map((article, index) => (
+                {multipleCatData.slice(0, 10).map((article, index) => (
                   <div className="col-sm-6 col-12" key={index}>
                     <div className="blog-box-layout1">
                       <div className="item-img">
-                        <a href="#">
+                        <Link to={`/reading-blog/${article.slug}`}>
                           <img
                             src={article.image}
                             alt={article.title}
                             style={{ height: "250px", width: "100%" }}
                           />
-                        </a>
+                        </Link>
                       </div>
                       <div className="item-content">
                         <h3 className="item-title">
                           {" "}
-                          <a href="#">{limitCharacters(article.title, 50)}</a>
+                          <Link to={`/reading-blog/${article.slug}`}>
+                            {limitCharacters(article.title, 50)}
+                          </Link>
                         </h3>
                         <p
                           style={{ textAlign: "justify" }}
@@ -162,15 +194,20 @@ const BlogContent = ({}) => {
                             __html: limitCharacters(article.description, 400),
                           }}
                         ></p>
-                        <a href="#" className="item-btn">
+                        <Link
+                          to={`/reading-blog/${article.slug}`}
+                          className="item-btn"
+                        >
                           READ MORE
                           <i className="fas fa-arrow-right" />
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </div>
                 ))}
               </div>
+              <br />
+              <br />
             </div>
             <div className="col-xl-3 col-lg-4 sidebar-widget-area sidebar-break-md">
               <div className="widget">
@@ -193,7 +230,7 @@ const BlogContent = ({}) => {
                 </div>
                 <div className="widget-latest">
                   <ul className="block-list">
-                    {multipleCatData.slice(-10).map((article, index) => (
+                    {multipleCatData.slice(0, 10).map((article, index) => (
                       <li className="single-item" key={index}>
                         <div className="item-img">
                           <a href="#">
@@ -206,11 +243,11 @@ const BlogContent = ({}) => {
                         </div>
                         <div className="item-content">
                           <div className="item-title">
-                            <a href="#">
+                            <Link to={`/reading-blog/${article.slug}`}>
                               <small>
                                 {limitCharacters(article.title, 20)}
                               </small>
-                            </a>
+                            </Link>
                           </div>
                         </div>
                       </li>
@@ -218,58 +255,7 @@ const BlogContent = ({}) => {
                   </ul>
                 </div>
               </div>
-
-              <div className="widget">
-                <div className="section-heading heading-dark">
-                  <h3 className="item-heading">CATEGORIES</h3>
-                </div>
-                <div className="widget-categories">
-                  <ul>
-                    <li>
-                      <a href="#">
-                        Beauty
-                        <span>(35)</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        Fashion
-                        <span>(10)</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        Food
-                        <span>(25)</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        Life Style
-                        <span>(15)</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        Travel
-                        <span>(22)</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        Video
-                        <span>(18)</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        Technology
-                        <span>(22)</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+              <CategorySlug />
               <div className="widget">
                 <div className="widget-newsletter-subscribe">
                   <h3>Get Latest Updates</h3>
@@ -302,19 +288,18 @@ const BlogContent = ({}) => {
                   {feaArticle.map((article, index) => (
                     <div className="featured-box-layout1" key={index}>
                       <div className="item-img">
-
-                          <img
-                              src={article.image}
-                              alt={article.title}
-                              style={{ height: "250px", width: "100%" }}
-                              className="img-fluid"
-                            />
+                        <img
+                          src={article.image}
+                          alt={article.title}
+                          style={{ height: "250px", width: "100%" }}
+                          className="img-fluid"
+                        />
                       </div>
                       <div className="item-content">
                         <h5 className="item-title">
-                          <a href="#">
-                           {limitCharacters(article.title, 50)}
-                          </a>
+                          <Link to={`/reading-blog/${article.slug}`}>
+                            {limitCharacters(article.title, 50)}
+                          </Link>
                         </h5>
                       </div>
                     </div>

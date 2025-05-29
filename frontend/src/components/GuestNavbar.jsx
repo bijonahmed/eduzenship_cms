@@ -13,6 +13,7 @@ const Navbar = () => {
   const [name, setName] = useState("");
   const { getToken, token, logout } = AuthUser();
   const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const [postCategory, setPostCaegory] = useState([]);
   const fetechGlobalData = async () => {
     try {
       const response = await axios.get(`/public/getGlobalData`);
@@ -29,9 +30,30 @@ const Navbar = () => {
       navigate("/login");
     }
   };
+  const getRoute = (slug) => {
+    if (slug === "countries") return `/country-blog`;
+    if (slug === "courses") return `/course-blog`;
+    if (slug === "services") return `/services-blog`;
+    if (slug === "our-offerings") return `/offer-blog`;
+    if (slug === "blog") return `/blog`;
+    return `/`;
+  };
+  const categoryList = async () => {
+    const post_category_id = 8;
+    try {
+      const response = await axios.get(`/public/getCategoryList`, {
+        params: { post_category_id }, // Passing the parameter as a query string
+      });
+      //console.log("API Response:", response.data); // Log the response
+      setPostCaegory(response.data);
+    } catch (error) {
+      console.error("Error fetching data", error);
+    }
+  };
 
   useEffect(() => {
     fetechGlobalData();
+    categoryList();
 
     const menu = document.getElementById("header-menu");
     const placeholder = document.getElementById("rt-sticky-placeholder");
@@ -159,22 +181,15 @@ const Navbar = () => {
                     <li>
                       <a href="#">CATEGORIES</a>
                       <ul className="dropdown-menu-col-1">
-                        <li>
-                          <a href="#">Blog Category 1</a>
-                        </li>
-                        <li>
-                          <a href="#">Blog Category 2</a>
-                        </li>
-                        <li>
-                          <a href="#">Blog Category 3</a>
-                        </li>
-                        <li>
-                          <a href="#">Blog Category 4</a>
-                        </li>
+                        {postCategory.map((data, index) => (
+                          <li>
+                            <Link to={getRoute(data.slug)}>{data.name}</Link>
+                          </li>
+                        ))}
                       </ul>
                     </li>
                     <li>
-                      <a href="#">BLOG</a>
+                      <Link to="/blog">Blog</Link>
                     </li>
                     <li>
                       <Link to="/contact">CONTACT</Link>
@@ -192,12 +207,12 @@ const Navbar = () => {
       <nav className="navbar navbar-expand-lg navbar-light bg-light d-block d-lg-none">
         <div className="container-fluid">
           <a className="navbar-brand" href="/">
-          <img
-                        src="/img/main-logo.png"
-                        alt="logo"
-                        className="img-fluid"
-                        style={{ height: "40px" }}
-                      />
+            <img
+              src="/img/main-logo.png"
+              alt="logo"
+              className="img-fluid"
+              style={{ height: "40px" }}
+            />
           </a>
           <button
             className="navbar-toggler"

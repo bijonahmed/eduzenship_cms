@@ -17,6 +17,10 @@ import Courses from "../pages/Courses.jsx";
 import OurServices from "../pages/OurServices.jsx";
 import OurOffer from "../pages/OurOffer.jsx";
 import Blog from "../pages/Blog.jsx";
+import CountryCategory from "../pages/CountryCategory.jsx";
+import CourseCategory from "../pages/CourseCategory.jsx";
+import ServiceCategory from "../pages/ServiceCategory.jsx";
+import OfferCategory from "../pages/OfferCategory.jsx";
 import BlogDetails from "../pages/BlogDetails.jsx";
 import Details from "../pages/Details.jsx";
 import MissionVission from "../pages/MissionVission.jsx";
@@ -26,16 +30,6 @@ import Dashboard from "../pages/Dashboard";
 
 import MyProfile from "../pages/users/MyProfile.jsx";
 
-// import MerchantList from "../pages/users/MerchantList.jsx";
-// import RoleList from "../pages/users/RoleList.jsx";
-// import RoleAdd from "../pages/users/Addrole.jsx";
-//import BulkAddress from "../pages/configration/address/BulkAddress.jsx";
-
-// import RoleEdit from "../pages/users/EditRole.jsx";
-// import UserEdit from "../pages/users/EditUser.jsx";
-// import SuperAdminList from "../pages/users/SuperAdminList.jsx";
-// import AdminList from "../pages/users/AdminList.jsx";
-// import UserAdd from "../pages/users/UserAdd.jsx";
 
 const AppRouter = () => {
   return (
@@ -57,6 +51,12 @@ const AppRouter = () => {
       <Route path="/our-services" element={<OurServices />} />
       <Route path="/mission-vision" element={<MissionVission />} />
       <Route path="/blog" element={<Blog />} />
+      <Route path="/country-blog" element={<CountryCategory />} />
+      <Route path="/course-blog" element={<CourseCategory />} />
+      <Route path="/services-blog" element={<ServiceCategory />} />
+      <Route path="/offer-blog" element={<OfferCategory />} />
+
+
       <Route path="/blog-details" element={<BlogDetails />} />
       <Route path="/user/change-password" element={<ChangePassword />} />
       <Route path="/user/profile" element={<MyProfile />} />

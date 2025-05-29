@@ -82,7 +82,6 @@ const Contact = () => {
         {/* Inne Page Banner Area End Here  header-menu menu-layout1 box-layout-child bg--light*/}
         {/* Contact Area Start Here */}
         <section className="contact-wrap-layout1">
-          <div className="container">
             <div className="row gutters-50">
               <div className="col-lg-8">
                 <div className="contact-box-layout1">
@@ -172,7 +171,7 @@ const Contact = () => {
                 </div>
               </div>
             </div>
-          </div>
+          
         </section>
         {/* Contact Area End Here */}
       </div>

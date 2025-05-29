@@ -90,7 +90,7 @@ const Footer = () => {
 
       {/* Social Icon */}
       <a
-        href="#"
+        href={`${name.fblink}`} target="_blank"
         style={{ color: "#fff", fontSize: "16px", textDecoration: "none" }}
       >
         <i className="fab fa-facebook-f"></i>

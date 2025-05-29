@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import Header from "../components/GuestNavbar";
 import Loader from "../components/Loader";
 import { Helmet } from "react-helmet";
+import "../components/css/about.css";
 
 const About = () => {
   const [showData, setData] = useState([]);
@@ -42,7 +43,7 @@ const About = () => {
           <title>About</title>
         </Helmet>
         <section className="inner-page-banner bg-common">
-          <div className="container">
+          <div className="container-fluid">
             <div className="row">
               <div className="col-12">
                 <div className="breadcrumbs-area">
@@ -59,71 +60,35 @@ const About = () => {
           </div>
         </section>
         <br />
-        <section className="blog-wrap-layout2">
-          <div className="container">
-            <div className="row gutters-40">
-              {/* Blog Item */}
-              <div
-                className="col-xl-12 col-lg-12 h-100"
-                style={{ minHeight: "600px" }}
-              >
+        <section className="blog-section">
+            <div className="row">
+              <div className="col-12 content-wrapper">
                 {loading ? (
-                  // Show a loader while loading
-                  <center>
+                  <div className="loader-wrapper">
                     <Loader />
-                  </center>
+                  </div>
                 ) : (
-                  // Show content once loading is finished
                   showData.map((item) => (
-                    <div className="blog-box-layout1" key={item.id}>
-                      <div className="item_img">
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className="img-fluid rounded w-100"
-                          style={{
-                            height: "auto",
-                            maxHeight: "700px",
-                            border: "4px solid #ccc", // light gray border
-                            borderRadius: "8px", // slightly rounded corners
-                            boxShadow: "0 4px 12px rgba(0,0,0,0.1)", // subtle shadow for depth
-                          }}
-                        />
+                    <div className="blog-card" key={item.id}>
+                      <div className="blog-image">
+                        <img src={item.image} alt={item.name} />
                       </div>
-                      <br/>
-                      <div
-                        className="item-content"
-                        style={{ maxWidth: "100%", color: "black" }}
-                      >
-                        <h1
-                          className="item-title h4 mb-3"
-                          style={{ fontSize: "25px" }}
-                        >
-                          {item.name}
-                        </h1>
-                        <div style={{ color: "black" }}>
-                          <div
-                            className="text-justify"
-                            style={{ color: "inherit" }}
-                            dangerouslySetInnerHTML={{
-                              __html: item.description,
-                            }}
-                          ></div>
-                        </div>
+                      <div className="blog-content">
+                        <h2 className="blog-title">{item.name}</h2>
+                        <div
+                          className="blog-description"
+                          dangerouslySetInnerHTML={{ __html: item.description }}
+                        ></div>
                       </div>
                     </div>
                   ))
                 )}
               </div>
-
-              {/* End of Blog Item */}
             </div>
-          </div>
+         
         </section>
-
-        
       </div>
-      <br/>
+      <br />
       <Footer />
     </div>
   );
