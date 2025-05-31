@@ -204,7 +204,7 @@ Route::middleware(['auth:api', CheckUserStatus::class])->group(function () {
     Route::group([
         'prefix' => 'dashboard'
     ], function () {
-        Route::get('countBookingData', [DashboardController::class, 'countData']);
+        Route::get('countData', [DashboardController::class, 'countData']);
         Route::get('getTodayBookingList', [DashboardController::class, 'getTodayBookingList']);
     });
 

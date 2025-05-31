@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "/config/axiosConfig";
 import Footer from "../components/Footer";
 import Header from "../components/GuestNavbar";
-
+import CategorySlug from "../components/CategorySlug";
 import { Helmet } from "react-helmet";
 // import FeaturesPost from "../components/FeaturesPost";
 import Loader from "../components/Loader";
@@ -218,21 +218,7 @@ const BlogDetails = () => {
                       </ul>
                     </div>
                   </div>
-
-                  <div className="widget">
-                    <div className="section-heading heading-dark">
-                      <h3 className="item-heading">CATEGORIES</h3>
-                    </div>
-                    <div className="widget-categories">
-                      <ul>
-                        {postCategory.map((data) => (
-                          <li>
-                            <Link to={getRoute(data.slug)}>{data.name}</Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
+                  <CategorySlug />
                   <div className="widget d-none">
                     <div className="widget-newsletter-subscribe">
                       <h3>Get Latest Updates</h3>
